@@ -7,11 +7,11 @@ import {
 } from '../base';
 import { FeatureDropdownInput } from '../dropdowns';
 
-export const sound_ambience: Feature<number> = {
-  name: 'Ambience volume',
+export const sound_ambience: FeatureToggle = {
+  name: 'Enable ambience',
   category: 'SOUND',
   description: `Ambience refers to the more noticeable ambient sounds that play on occasion.`,
-  component: FeatureSliderInput,
+  component: CheckboxInput,
 };
 
 export const sound_breathing: FeatureToggle = {
