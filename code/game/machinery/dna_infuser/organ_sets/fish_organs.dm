@@ -223,8 +223,8 @@
 	icon_state = "gills"
 
 	safe_oxygen_min = 0 //We don't breathe this
-	///The required partial pressure of water_vapor for not drowing
-	var/safe_water_level = 29
+	///The required partial pressure of water_vapor for not suffocating.
+	var/safe_water_level = parent_type::safe_oxygen_min
 
 	/// Bodypart overlay applied to the chest where the lungs are in
 	var/datum/bodypart_overlay/simple/gills/gills
@@ -240,6 +240,7 @@
 		gills = new()
 		AddElement(/datum/element/noticable_organ, "%PRONOUN_Theyve a set of gills on %PRONOUN_their neck.", BODY_ZONE_PRECISE_MOUTH)
 	AddComponent(/datum/component/bubble_icon_override, "fish", BUBBLE_ICON_PRIORITY_ORGAN)
+	AddComponent(/datum/component/speechmod, replacements = strings("crustacean_replacement.json", "crustacean"))
 
 /obj/item/organ/internal/lungs/fish/Destroy()
 	QDEL_NULL(gills)
@@ -301,7 +302,6 @@
 	name = "mutated semi-aquatic lungs"
 	desc = "DNA from an amphibious or semi-aquatic creature infused on a pair lungs. Enjoy breathing underwater without drowning outside water."
 	safe_oxygen_min = /obj/item/organ/internal/lungs::safe_oxygen_min
-	safe_water_level = 19
 	has_gills = FALSE
 	/**
 	 * If false, we don't breathe air since we've got water instead.
@@ -338,7 +338,7 @@
 ///Fish infuser organ, allows mobs to safely eat raw fish.
 /obj/item/organ/internal/stomach/fish
 	name = "mutated fish-stomach"
-	desc = "Fish DNA infused into a stomach now parmated by the faint smell of salt and slightly putrified fish."
+	desc = "Fish DNA infused into a stomach now permeated by the faint smell of salt and slightly putrefied fish."
 	icon = 'icons/obj/medical/organs/infuser_organs.dmi'
 	icon_state = "stomach"
 	greyscale_config = /datum/greyscale_config/mutant_organ
